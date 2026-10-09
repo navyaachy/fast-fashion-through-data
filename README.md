@@ -1,456 +1,161 @@
-##### \# Fast Fashion Through Data
+# FashionLens: Fast Fashion Through Data
 
-##### 
+**Analysing Material Composition, Sustainability and Product Pricing**
 
-##### \## Analysing Material Composition, Sustainability and Product Pricing
+## 1. Project Overview
 
-##### 
+FashionLens is a data analysis project that explores H&M product data to identify patterns in material composition, sustainability-related indicators and retail pricing. It uses Python, Pandas and Matplotlib to process product information and generate visual insights.
 
-##### \---
+The project also demonstrates open-source development practices through Git, GitHub, Docker and Docker Compose.
 
-##### 
+## 2. Problem Statement
 
-##### \## Problem Statement
+Fast fashion products contain different materials and may include sustainability-related information, such as recycled-material mentions. Identifying patterns across a large product catalogue can be difficult when examining products individually.
 
-##### 
+FashionLens analyses H&M product data to understand commonly used materials, identify recycled-material mentions and examine how pricing varies across products and categories.
 
-##### Fast fashion increasingly incorporates synthetic and recycled materials while presenting sustainability-related information at the product level. However, it is difficult to identify broader patterns in material composition, sustainability indicators and product pricing across a large product catalogue.
+## 3. Objectives
 
-##### 
+- Analyse the distribution of product prices.
+- Identify commonly mentioned materials in product descriptions.
+- Examine the frequency of recycled-material mentions.
+- Compare average prices between products with and without recycled-material mentions.
+- Explore pricing differences across product category groups.
+- Build a reproducible analysis pipeline using open-source tools.
 
-##### This project analyses H\&M product data to examine material usage, identify recycled-material indicators, and investigate how these factors are associated with retail pricing and product categories.
+## 4. Dataset
 
-##### 
+**Dataset:** H&M Product Dataset  
+**Source:** https://www.kaggle.com/datasets/niharpatel03/h-and-m-product-dataset  
+**File used:** `handm.csv`
 
-##### \---
+The dataset contains 9,677 product records and 16 columns, including product identifiers, product names, prices, category codes, material descriptions and colour information.
 
-##### 
+The original dataset is subject to the terms and conditions of its source.
 
-##### \## Objectives
+## 5. Technology Stack
 
-##### 
+- **Python:** Data processing and analysis.
+- **Pandas:** Data cleaning, transformation and aggregation.
+- **Matplotlib:** Data visualization.
+- **Regular Expressions (Regex):** Extracting material information from text.
+- **Google Colab:** Exploratory analysis and notebook execution.
+- **Git:** Version control.
+- **GitHub:** Source-code hosting and repository management.
+- **Docker:** Containerizing the analysis environment.
+- **Docker Compose:** Building and running the analysis pipeline.
 
-##### The project aims to:
+## 6. Project Workflow
 
-##### 
+1. Load the H&M product dataset.
+2. Inspect the dataset structure and missing values.
+3. Analyse product price distributions.
+4. Extract material names from product descriptions.
+5. Count frequently mentioned materials.
+6. Identify products containing recycled-material mentions.
+7. Compare average prices between the two groups.
+8. Analyse average prices across selected product category groups.
+9. Generate visualizations and summary outputs.
+10. Run the analysis through a Docker Compose workflow.
 
-##### \- Analyse the distribution of H\&M product prices.
+## 7. Key Findings
 
-##### \- Identify the most commonly mentioned materials in product compositions.
+The analysis produced the following initial findings:
 
-##### \- Identify products containing recycled-material indicators.
+- The dataset contains **9,677 product records**.
+- **5,869 records (60.65%)** contain a recycled-material mention in the materials field.
+- Products with a recycled-material mention have an average listed price of approximately **35.55**, compared with **32.16** for products without such a mention.
+- Polyester, cotton and spandex are among the most frequently extracted material mentions.
+- Among the selected category groups, sportswear has the highest average listed price, followed by men's products and ladies' products.
 
-##### \- Compare the average prices of products with and without recycled-material mentions.
+These findings describe associations and patterns in the dataset. They do not establish that recycled materials cause higher prices or independently verify a product's environmental impact.
 
-##### \- Analyse product categories and their pricing patterns.
+## 8. Repository Structure
 
-##### \- Compare average prices across broader category groups.
+```text
+fast-fashion-through-data/
+├── notebooks/
+├── outputs/
+├── src/
+├── .gitignore
+├── Dockerfile
+├── docker-compose.yml
+├── LICENSE
+├── README.md
+└── requirements.txt
+```
 
-##### \- Identify data-driven patterns in H\&M's product catalogue.
+The raw dataset is excluded from version control and must be downloaded separately.
 
-##### 
+## 9. Installation and Execution
 
-##### \---
+**Prerequisites**
 
-##### 
+- Python
+- Git
+- Docker Desktop with Docker Compose
+- The H&M dataset saved as `data/raw/handm.csv`
 
-##### \## Dataset
+**Run using Docker Compose**
 
-##### 
+Clone the repository and enter its directory. Download the dataset and place it at the required path, creating the `data/raw/` folders if necessary.
 
-##### The project uses the H\&M Product Dataset available on Kaggle.
+Then execute:
 
-##### 
+```bash
+docker compose up --build
+```
 
-##### \*\*Dataset Source:\*\*  
+The pipeline processes the dataset and generates analysis outputs in the `outputs/` directory.
 
-##### https://www.kaggle.com/datasets/niharpatel03/h-and-m-product-dataset
+**Run using Python**
 
-##### 
+Install the required dependencies:
 
-##### The dataset contains product-level information including:
+```bash
+pip install -r requirements.txt
+```
 
-##### 
+Run the analysis script:
 
-##### \- Product ID
+```bash
+python src/analyze.py
+```
 
-##### \- Product name
+Ensure that the dataset is available at the expected path before execution.
 
-##### \- Brand name
+## 10. Version Control
 
-##### \- Price
+The project uses Git and GitHub to track changes and maintain the source code.
 
-##### \- Stock state
+The repository includes a `main` branch and a `feature/reproducibility` branch. The feature branch was integrated into `main` through a fast-forward merge.
 
-##### \- Colour information
+The `.gitignore` file excludes the raw dataset, Python cache files and Jupyter checkpoint files.
 
-##### \- Product category
+## 11. Reproducibility
 
-##### \- Product details
+The project includes a requirements file, a Dockerfile and a Docker Compose configuration to document dependencies and provide a consistent execution environment.
 
-##### \- Material composition
+Users must download the dataset separately because the raw CSV is not stored in the repository. The dataset should be saved using the expected filename and directory structure.
 
-##### 
+## 12. Limitations
 
-##### The raw dataset is not stored in this repository because it is third-party data and is approximately 19 MB in size.
+- The analysis uses a single H&M product dataset.
+- The presence of the word “Recycled” is used as an indicator, not as independent verification of sustainability.
+- Missing material descriptions may affect the recycled-material comparison.
+- Material counts represent extracted mentions, not necessarily unique products.
+- Price comparisons are descriptive and do not establish causation.
+- The project does not train a machine learning model or provide price predictions.
+- The current repository contains a notebook and analysis pipeline rather than a deployed web application.
 
-##### 
+## 13. Future Scope
 
-##### \---
+Potential extensions include improved material extraction, more detailed category comparisons, statistical testing of price differences and integration of independently verified sustainability information.
 
-##### 
+## 14. License
 
-##### \## Project Workflow
+The project's original code and documentation are distributed under the MIT License. Third-party datasets remain subject to their respective source terms.
 
-##### 
+## 15. Conclusion
 
-##### H\&M Product Dataset
-
-##### &#x20;       ↓
-
-##### Data Loading
-
-##### &#x20;       ↓
-
-##### Basic Data Inspection \& Cleaning
-
-##### &#x20;       ↓
-
-##### Material Composition Extraction
-
-##### &#x20;       ↓
-
-##### Material Frequency Analysis
-
-##### &#x20;       ↓
-
-##### Recycled-Material Indicator
-
-##### &#x20;       ↓
-
-##### Product Category Analysis
-
-##### &#x20;       ↓
-
-##### Price Analysis
-
-##### &#x20;       ↓
-
-##### Visualisation
-
-##### &#x20;       ↓
-
-##### Data-Driven Findings
-
-##### 
-
-##### \---
-
-##### 
-
-##### \## Analysis Performed
-
-##### 
-
-##### \### 1. Dataset Overview
-
-##### 
-
-##### The dataset was inspected to understand:
-
-##### 
-
-##### \- Number of records
-
-##### \- Available columns
-
-##### \- Missing values
-
-##### \- Price statistics
-
-##### \- Product and category information
-
-##### 
-
-##### \### 2. Price Analysis
-
-##### 
-
-##### The distribution of product prices was analysed to understand the overall pricing pattern of products in the dataset.
-
-##### 
-
-##### \### 3. Material Composition Analysis
-
-##### 
-
-##### The material information provided in the product descriptions was processed to extract material names and their percentage composition.
-
-##### 
-
-##### The frequency of commonly mentioned materials was then analysed.
-
-##### 
-
-##### \### 4. Recycled-Material Analysis
-
-##### 
-
-##### A sustainability indicator was created by identifying whether the product's material information contains a recycled-material mention.
-
-##### 
-
-##### Products were then compared based on whether a recycled-material mention was present.
-
-##### 
-
-##### \### 5. Price Comparison
-
-##### 
-
-##### The average listed price was compared between products with a recycled-material mention and products without a recycled-material mention.
-
-##### 
-
-##### This analysis identifies an association in the dataset and does not imply that recycled materials directly cause higher prices.
-
-##### 
-
-##### \### 6. Category Analysis
-
-##### 
-
-##### Product categories were analysed to identify the most represented product groups.
-
-##### 
-
-##### Average prices were also compared across product categories and broader category groups.
-
-##### 
-
-##### \---
-
-##### 
-
-##### \## Key Findings
-
-##### 
-
-##### The initial analysis identified the following patterns:
-
-##### 
-
-##### \- Polyester, cotton and spandex are among the most frequently mentioned materials.
-
-##### \- Around \*\*60.65%\*\* of the product records contain a recycled-material mention.
-
-##### \- Products with a recycled-material mention have a higher average listed price than products without one in this dataset.
-
-##### \- Product categories differ considerably in both product count and average listed price.
-
-##### \- Among the identified category groups, sportswear has the highest average listed price, followed by men's and ladies' products.
-
-##### 
-
-##### These findings describe patterns and associations within the dataset and should not be interpreted as causal relationships.
-
-##### 
-
-##### \---
-
-##### 
-
-##### \## Technologies and Open-Source Tools
-
-##### 
-
-##### The project uses:
-
-##### 
-
-##### \- \*\*Python\*\* for data analysis
-
-##### \- \*\*Pandas\*\* for data processing and analysis
-
-##### \- \*\*Matplotlib\*\* for data visualisation
-
-##### \- \*\*Jupyter Notebook / Google Colab\*\* for analysis
-
-##### \- \*\*Git\*\* for version control
-
-##### \- \*\*GitHub\*\* for repository management and collaboration
-
-##### \- \*\*Docker\*\* for reproducible execution and environment management
-
-##### 
-
-##### \---
-
-##### 
-
-##### \## Repository Structure
-
-##### 
-
-##### The repository is organised into the following structure:
-
-##### 
-
-##### \- `data/` contains raw and processed data
-
-##### \- `notebooks/` contains the data-analysis notebook
-
-##### \- `outputs/` contains generated outputs and visualisations
-
-##### \- `src/` contains reusable source code
-
-##### \- `.gitignore` prevents raw data and temporary files from being committed
-
-##### \- `README.md` contains project documentation
-
-##### \- `LICENSE` contains the project license
-
-##### \- `requirements.txt` contains Python dependencies
-
-##### \- `Dockerfile` contains the container configuration
-
-##### \- `docker-compose.yml` contains the Docker Compose workflow
-
-##### 
-
-##### \---
-
-##### 
-
-##### \## Reproducibility
-
-##### 
-
-##### The project is structured to support reproducible analysis using:
-
-##### 
-
-##### \- Git and GitHub for version control
-
-##### \- A requirements file for Python dependencies
-
-##### \- Docker for environment consistency
-
-##### \- Documented project workflow and setup instructions
-
-##### 
-
-##### The raw dataset is excluded from version control because it is third-party data and is approximately 19 MB in size.
-
-##### 
-
-##### To reproduce the analysis, obtain the dataset from the original Kaggle source and place it in the appropriate local data directory before running the project.
-
-##### 
-
-##### \---
-
-##### 
-
-##### \## Version Control
-
-##### 
-
-##### Git and GitHub are used to manage the project and track development.
-
-##### 
-
-##### The repository demonstrates:
-
-##### 
-
-##### \- Version-controlled project files
-
-##### \- Meaningful commits
-
-##### \- Feature branching
-
-##### \- Branch merging
-
-##### \- Remote GitHub repository management
-
-##### 
-
-##### \---
-
-##### 
-
-##### \## Sustainability Analysis Note
-
-##### 
-
-##### The recycled-material indicator is based on the presence of recycled-material information in the product's material description.
-
-##### 
-
-##### Therefore, the analysis measures the \*\*presence of a recycled-material mention\*\*, rather than independently verifying the sustainability or environmental impact of the product.
-
-##### 
-
-##### \---
-
-##### 
-
-##### \## Limitations
-
-##### 
-
-##### \- The analysis is based on the available H\&M product dataset.
-
-##### \- Material information is derived from product descriptions.
-
-##### \- The presence of a recycled-material mention does not measure the complete environmental impact of the product.
-
-##### \- Price comparisons show associations and do not establish causation.
-
-##### \- Category groups are derived from the available product category codes.
-
-##### 
-
-##### \---
-
-##### 
-
-##### \## Future Scope
-
-##### 
-
-##### The project can be extended by:
-
-##### 
-
-##### \- Analysing more detailed sustainability indicators.
-
-##### \- Exploring relationships between material composition and product categories.
-
-##### \- Expanding the analysis to additional product attributes.
-
-##### \- Automating the data-processing and analysis pipeline.
-
-##### \- Improving reproducibility through containerisation.
-
-##### 
-
-##### \---
-
-##### 
-
-##### \## License
-
-##### 
-
-##### The original code and documentation developed for this project are licensed under the \*\*MIT License\*\*.
-
-##### 
-
-##### The H\&M product dataset is third-party data and remains subject to its original source terms and licensing.
-
-##### 
-
-##### See the `LICENSE` file for the project license.
-
+FashionLens demonstrates how open-source data analysis tools can be used to investigate material composition, recycled-material mentions and pricing patterns in fast fashion. The project combines exploratory data analysis with Git-based version control and containerized execution to create a documented and reusable workflow.
